@@ -5,10 +5,10 @@ import numpy as np
 import Plotter.plotter as bplt
 import csv
 N=100000
-TIME_STEPS=2000
+TIME_STEPS=200000
 p= 0.75
 r= 0.2
-MAX_RUNS = 100
+MAX_RUNS = 25 
 SAMPLES_PER_r =5
 out_data_path = "runs_results.csv"
 
@@ -63,7 +63,6 @@ for s in range(0,MAX_RUNS):
     
     
 
-
 with open(out_data_path,"w") as fm:
             wt = csv.writer(fm)
             wt.writerows(zip(rs,final_active_states_counts))
@@ -71,4 +70,4 @@ with open(out_data_path,"w") as fm:
 print(r)
 print(len(rs))
 print(len(final_active_states_counts))
-bplt.Plotting.scatter(rs,np.array(final_active_states_counts).T,title=out_data_path+".png")
+bplt.Plotting.scatter(rs,final_active_states_counts,title=out_data_path+".png")
