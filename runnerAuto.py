@@ -1,19 +1,17 @@
 import subprocess
 #subprocess.run(["ls", "-l","-a"])
 import math 
-import numpy as np
 import Plotter.plotter as bplt
 import csv
-N=100000
-TIME_STEPS=2000
+N=10
+TIME_STEPS=20
 p= 0.75
 r= 0.2
 MAX_RUNS = 100
-SAMPLES_PER_r =5
 out_data_path = "runs_results.csv"
 
 rs = []
-final_active_states_counts  = []
+final_active_states_count  = []
 r_upper = 1 
 r_lower =0
 dr =  0.1
@@ -46,29 +44,28 @@ def run_experiment(N,TIME_STEPS,p,r):
 
     return count
 
-r=0
 for s in range(0,MAX_RUNS):
+    
+    final_active_states_count.append(run_experiment(N,TIME_STEPS,p,r))
     rs.append(r)
-    final_active_states_counts.append([])
-    for n in range(0,SAMPLES_PER_r): 
-        final_active_states_counts[-1].append(run_experiment(N,TIME_STEPS,p,r))
-    r = r +1/MAX_RUNS 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    if(final_active_states_count[-1]>N/2):
+        #Too much spreading, i.e. active states, reduce r
+        r_upper = r+dr
+    elif(final_active_states_count[-1]<N/2):
+        #Too few active states, increase r
+        r_lower = r - dr
+    else:
+        print("Finished")
+        break #Equal, r perfect!
+    r = (r_upper + r_lower)/2
+
 
 
 with open(out_data_path,"w") as fm:
             wt = csv.writer(fm)
-            wt.writerows(zip(rs,final_active_states_counts))
+            wt.writerows(zip(rs,final_active_states_count))
 
 print(r)
 print(len(rs))
-print(len(final_active_states_counts))
-bplt.Plotting.scatter(rs,np.array(final_active_states_counts).T,title=out_data_path+".png")
+print(len(final_active_states_count))
+bplt.Plotting.scatter(rs,[final_active_states_count],title=out_data_path+".png")
