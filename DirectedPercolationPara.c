@@ -20,7 +20,7 @@ int writeDataToFile(char* filePathStr,bool dataSet[][N])    {
     
     FILE* filePath = fopen(filePathStr,"a");
     for (int j=0; j<MAX_STEPS_PER_SAVE;j++)  {
-        for (int k=0;k<N;k++)   { 
+        for (int k=1;k<N-1;k++)   { 
             if(dataSet[j][k])    {
                 fwrite("1",sizeof(char),1,filePath);
             }
@@ -46,17 +46,23 @@ int main(int argc, char* argv[])  {
     int p = atof(argv[3])*RAND_MAX ;
     int r = atof(argv[4])*RAND_MAX;
     char ExperimentName[30];
-    snprintf(ExperimentName,sizeof(ExperimentName), "N%dT%dp%.2fr%.5f.exp", N,TIME_STEPS,(double)*argv[3],(double)*argv[4]);
+    snprintf(ExperimentName,sizeof(ExperimentName), "N%dT%dp%.2fr%.2f.exp", N,TIME_STEPS,p/(float)RAND_MAX,r/(float)RAND_MAX);
     printf("%s\n",ExperimentName); 
-    int initialProbability = 0.5*RAND_MAX;
+    int initialProbability = 0.1*RAND_MAX;
    
 
     MAX_STEPS_PER_SAVE = 2750*2750/(N);
+    printf("calced %d\n",MAX_STEPS_PER_SAVE);
 
     if(MAX_STEPS_PER_SAVE>TIME_STEPS)   {
         MAX_STEPS_PER_SAVE = TIME_STEPS;
     }
 
+    printf("%d\n",N);
+    printf("%d\n",TIME_STEPS);
+    printf("%d\n",p);
+    printf("%d\n",r);
+    printf("%d\n",MAX_STEPS_PER_SAVE);
 
 
     fclose(fopen(ExperimentName,"w"));
@@ -81,6 +87,7 @@ int main(int argc, char* argv[])  {
             dataSet[t_p+1][N-1] = dataSet[t_p][0]&&rand()<r;
             dataSet[t_p+1][0]   = dataSet[t_p][0]&&rand()<p;
             dataSet[t_p+1][1]   = dataSet[t_p][0]&&rand()<r;
+        #pragma omp parallel for schedule(static) default(none) shared(dataSet,t_p,N,p,r)    
             for (int i = 0 ; i<N-1;i++)   { //Evolving the 'middle bit' (unaffected by pbd) of processing
                 
                 //Apply or operation so to 'protect' active state already set from it being set (and 
@@ -99,12 +106,14 @@ int main(int argc, char* argv[])  {
         
         }
         t = t+MAX_STEPS_PER_SAVE;
+        printf("%d\n",t);
         writeDataToFile(ExperimentName,dataSet);
         for(int j = 0; j<N ; j++)   {
             dataSet[0][j] = dataSet[MAX_STEPS_PER_SAVE-1][j];
         }
 
     }
+    printf("DONE");
 }
 
 
