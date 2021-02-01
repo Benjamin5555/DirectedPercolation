@@ -46,12 +46,12 @@ int main(int argc, char* argv[])  {
     int p = atof(argv[3])*RAND_MAX ;
     int r = atof(argv[4])*RAND_MAX;
     char ExperimentName[30];
-    snprintf(ExperimentName,sizeof(ExperimentName), "N%dT%dp%.2fr%.5f.exp", N,TIME_STEPS,(double)*argv[3],(double)*argv[4]);
+    snprintf(ExperimentName,sizeof(ExperimentName), "N%dT%dp%.2fr%.5f.exp", N,TIME_STEPS,atof(argv[3]),atof(argv[4]));
     printf("%s\n",ExperimentName); 
     int initialProbability = 0.5*RAND_MAX;
    
 
-    MAX_STEPS_PER_SAVE = 2750*2750/(N);
+    MAX_STEPS_PER_SAVE = 3000*2750/(N);
 
     if(MAX_STEPS_PER_SAVE>TIME_STEPS)   {
         MAX_STEPS_PER_SAVE = TIME_STEPS;
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])  {
 
     bool dataSet[MAX_STEPS_PER_SAVE][N]; 
     
-    //srand(time(0)); //Fordebugging same behaviour would be useful
+    srand(time(0)); //Fordebugging same behaviour would be useful
 
     for (int i=0;i<N;i++)   {
         dataSet[0][i] = rand()<initialProbability; 

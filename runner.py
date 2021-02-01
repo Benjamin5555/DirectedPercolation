@@ -8,9 +8,9 @@ N=100000
 TIME_STEPS=200000
 p= 0.75
 r= 0.2
-MAX_RUNS = 25 
-SAMPLES_PER_r =5
-out_data_path = "runs_results.csv"
+MAX_RUNS = 10
+SAMPLES_PER_r =2
+out_data_path = "runs_resultsBroad.csv"
 
 rs = []
 final_active_states_counts  = []
@@ -43,31 +43,26 @@ def run_experiment(N,TIME_STEPS,p,r):
     
     count = (f.readline().count("1"))#Count number of active states remaining
     f.close()
+    subprocess.run(["rm",ExperimentName])
 
     return count
 
-r=0
-for s in range(0,MAX_RUNS):
-    rs.append(r)
-    final_active_states_counts.append([])
-    for n in range(0,SAMPLES_PER_r): 
-        final_active_states_counts[-1].append(run_experiment(N,TIME_STEPS,p,r))
-    r = r +1/MAX_RUNS 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 
 with open(out_data_path,"w") as fm:
-            wt = csv.writer(fm)
-            wt.writerows(zip(rs,final_active_states_counts))
+    wt = csv.writer(fm)
 
+    r=0
+    for s in range(0,MAX_RUNS):
+        rs.append(r)
+        final_active_states_counts.append([])
+        for n in range(0,SAMPLES_PER_r): 
+            final_active_states_counts[-1].append(run_experiment(N,TIME_STEPS,p,r))
+        r = r +1/MAX_RUNS 
+    
+        wt.writerow((rs[-1],final_active_states_counts[-1]))
 print(r)
 print(len(rs))
 print(len(final_active_states_counts))
-bplt.Plotting.scatter(rs,final_active_states_counts,title=out_data_path+".png")
+print(len(final_active_states_counts[-1]))
+bplt.Plotting.scatter(rs,np.array(final_active_states_counts).T,title=out_data_path+".png")
