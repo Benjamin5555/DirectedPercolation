@@ -3,7 +3,7 @@
 #
 # C compiler and options for Intel
 #
-CC=     gcc  -fopenmp -std=c99 
+CC=     gcc  -fopenmp  
 LIB=    -lm
 
 #
