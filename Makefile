@@ -1,10 +1,10 @@
 # Makefile for DirectedPercolation code
 
 #
-# C compiler and options for Intel
+# C compiler and options 
 #
-CC=     gcc  -fopenmp -std=c99 
-LIB=    -lm
+CC=     gcc  -fopenmp  
+LIB=    -lm -Iparameter.h
 
 #
 # Object files
