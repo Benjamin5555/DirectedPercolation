@@ -85,7 +85,7 @@ def collect_data(ExperimentName):
 with open(out_data_path+".csv",'w') as f:
     output_writer  = csv.writer(f)
     for p in [0.75]:
-        for r in np.linspace(0.20,0.5,20):
+        for r in np.linspace(0.0,1,20):
         #[0.25,0.26,0.27,0.28,0.29,0.3]:
         
     
