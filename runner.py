@@ -12,7 +12,7 @@ from PIL import Image
 import csv
 
 N=100000
-TIME_STEPS = 200000
+TIME_STEPS   = 200000
 STEPS_PER_SAVE=1000
 
 OUT_FILE_PATH = ""
@@ -84,8 +84,9 @@ def collect_data(ExperimentName):
 
 with open(out_data_path+".csv",'w') as f:
     output_writer  = csv.writer(f)
+    output_writer.writerow(("Number of steps","Time steps","propagation probability","spread propagation","variance in count", "start count","average count"))
     for p in [0.75]:
-        for r in np.linspace(0.20,0.5,20):
+        for r in np.linspace(0.25,0.5,20):
         #[0.25,0.26,0.27,0.28,0.29,0.3]:
         
     
@@ -93,7 +94,7 @@ with open(out_data_path+".csv",'w') as f:
             #print(expName)
     
             data,counts = collect_data(expName)
-            output_writer.writerow((N,TIME_STEPS,p,r,counts.var,counts[0],counts.mean()))
+            output_writer.writerow((N,TIME_STEPS,p,r,counts.var(),counts[0],counts.mean()))
              
     
     

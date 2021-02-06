@@ -62,10 +62,17 @@ int main(int argc, char* argv[])  {
 
 
     //
-    for (int i=0;i<N;i++)   {
-        //previousStep[i] = drand48()<INIT_PROB;
-        dataStep[0][i] = drand48()<INIT_PROB; 
+    //
+    #pragma omp parallel for {
+        for (int i=0;i<N;i++)   {
+            //previousStep[i] = drand48()<INIT_PROB;
+            dataStep[0][i] = drand48()<INIT_PROB; 
+        }    
     }
+
+
+        
+
     int ap = 0;//By moving the 0 position around we can just
     for(int t=0;t<TIME_STEPS;t++)   {
         bool*  previousStep = dataStep[ap%3];
@@ -73,36 +80,40 @@ int main(int argc, char* argv[])  {
         bool*  pSpreadStep = dataStep[(ap+2)%3];
 
          
-        ////////PROPAGATION STEP
-        for(int i = 0; i<N ;i++) {
-            //If already alive then try keeping alive for next step
-            pPropagationStep[i] = previousStep[i]&&(drand48()<p);
-        }
+        #pragma omp parallel {
+            #pragma omp for {
+                ////////PROPAGATION STEP
+                for(int i = 0; i<N ;i++) {
+                    //If already alive then try keeping alive for next step
+                    pPropagationStep[i] = previousStep[i]&&(drand48()<p);
+                }
+            }
+                
         
-
-        ///////SPREAD STEP  
-        //pbc left edge
-        pSpreadStep[0] = pPropagationStep[0] || ( ( pPropagationStep[1]&&(drand48()<r) ) 
-                                                        || (pPropagationStep[N-1]&&(drand48()<r) ));
-
-        for (int i = 1; i<N-1;i++)  {
-            //Spread step for 'bulk' of system
-            //If already alive, just keep alive or if can  spread trial make alive from neighbour
-            pSpreadStep[i] = pPropagationStep[i]||( ( pPropagationStep[i-1]&&(drand48()<r) )
-                                                        || (pPropagationStep[i+1]&&(drand48()<r) ));
-        }
-        //pbc right edge
-        pSpreadStep[N-1] = pPropagationStep[N-1] || ( ( pPropagationStep[N-2]&&(drand48()<r) )
-                                                        || (pPropagationStep[0]&&(drand48()<r) ) );
-
-            
-   
-        //Set old final data step to new  position
-        for(int i = 0; i <N; i++)   {
-            previousStep[i] = pSpreadStep[i];
-        }
-
+                ///////SPREAD STEP  
+                //pbc left edge
+                pSpreadStep[0] = pPropagationStep[0] || ( ( pPropagationStep[1]&&(drand48()<r) ) 
+                                                                || (pPropagationStep[N-1]&&(drand48()<r) ));
+            #pragma omp for {
+                for (int i = 1; i<N-1;i++)  {
+                    //Spread step for 'bulk' of system
+                    //If already alive, just keep alive or if can  spread trial make alive from neighbour
+                    pSpreadStep[i] = pPropagationStep[i]||( ( pPropagationStep[i-1]&&(drand48()<r) )
+                                                                || (pPropagationStep[i+1]&&(drand48()<r) ));
+                }
+            }
+                //pbc right edge
+                pSpreadStep[N-1] = pPropagationStep[N-1] || ( ( pPropagationStep[N-2]&&(drand48()<r) )
+                                                                || (pPropagationStep[0]&&(drand48()<r) ) );
         
+                    
+           
+                //Set old final data step to new  position
+                //for(int i = 0; i <N; i++)   {
+                //   previousStep[i] = pSpreadStep[i];
+                //}
+        }
+     
         if(t%STEPS_PER_SAVE==0) {
                 write_to_file(pSpreadStep,t,ExperimentName);
         }
@@ -110,6 +121,7 @@ int main(int argc, char* argv[])  {
 
 
     }
+    
 }
 
 
