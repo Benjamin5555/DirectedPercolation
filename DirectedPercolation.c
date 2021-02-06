@@ -98,9 +98,9 @@ int main(int argc, char* argv[])  {
             
    
         //Set old final data step to new  position
-        for(int i = 0; i <N; i++)   {
-            previousStep[i] = pSpreadStep[i];
-        }
+        //for(int i = 0; i <N; i++)   {
+        //    previousStep[i] = pSpreadStep[i];
+        //}
 
         
         if(t%STEPS_PER_SAVE==0) {
