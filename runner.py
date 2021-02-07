@@ -11,9 +11,9 @@ import re
 from PIL import Image
 import csv
 
-N=100000
-TIME_STEPS   = 200000
-STEPS_PER_SAVE=1000
+N=1000000
+TIME_STEPS   = 2000
+STEPS_PER_SAVE=1
 
 OUT_FILE_PATH = ""
 p= 1 
@@ -23,6 +23,7 @@ INIT_PROB =0.5
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
 
+NUM_THREADS=4
 
 out_data_path = "runs_resultsBroad"
 KEEP_DATA = False
@@ -47,7 +48,8 @@ def write_parameters(p,r):
 def run_experiment(p,r):
     ExperimentName = "N"+str(N)+"T"+str(TIME_STEPS)+"p"+str(p)+"r"+str(r)
     subprocess.run(["mkdir",RAW_DATA_OUT+ExperimentName])
-    
+    os.environ ["OMP_NUM_THREADS"] = str(NUM_THREADS)
+ 
     global OUT_FILE_PATH
     OUT_FILE_PATH = RAW_DATA_OUT+ExperimentName
     
@@ -55,7 +57,7 @@ def run_experiment(p,r):
     subprocess.run(["make", "clean"])
     subprocess.run(["make"])
 
-    exp = subprocess.run(["./DirectedPercolation"],stdout=subprocess.PIPE)
+    exp = subprocess.run(["./DirectedPercolation"])
 
     return ExperimentName#exp.stdout.decode('utf-8')[:-1]
 
@@ -82,26 +84,33 @@ def collect_data(ExperimentName):
             subprocess.run(["rm",cfile])
     return np.array(datas, dtype=int), np.array(counts)
 
-with open(out_data_path+".csv",'w') as f:
-    output_writer  = csv.writer(f)
-    output_writer.writerow(("Number of steps","Time steps","propagation probability","spread propagation","variance in count", "start count","average count"))
-    for p in [0.75]:
-        for r in np.linspace(0.25,0.5,20):
-        #[0.25,0.26,0.27,0.28,0.29,0.3]:
-        
-    
-            expName = run_experiment(p,r)
-            #print(expName)
-    
-            data,counts = collect_data(expName)
-            output_writer.writerow((N,TIME_STEPS,p,r,counts.var(),counts[0],counts.mean()))
-             
-    
-    
-            #print("Gen image")
-            #im = Image.fromarray(np.uint8(data*255))
-            #im.save(expName+".png")
-            #print("Done with image")
-            #bplt.Plotting.colour_map_gen(data,expName+".png")  
-    
 
+def main():
+    with open(out_data_path+".csv",'w') as f:
+        output_writer  = csv.writer(f)
+        output_writer.writerow(("Number of steps","Time steps","propagation probability","spread propagation","variance in count", "start count","average count"))
+        p = 0.75
+        global NUM_THREADS
+        for T in [4,8]:
+        #for p in [0.75]:
+            for r in [0.5]:
+            #for r in np.linspace(0.25,0.5,20):
+            #[0.25,0.26,0.27,0.28,0.29,0.3]:
+                NUM_THREADS = T
+        
+                expName = run_experiment(p,r)
+                #print(expName)
+        
+                data,counts = collect_data(expName)
+                output_writer.writerow((N,TIME_STEPS,p,r,counts.var(),counts[0],counts.mean()))
+                 
+                
+        
+                #print("Gen image")
+                #im = Image.fromarray(np.uint8(data*255))
+                #im.save(expName+".png")
+                #print("Done with image")
+                #bplt.Plotting.colour_map_gen(data,expName+".png")  
+        
+if __name__ == "__main__":
+    main()
