@@ -1,7 +1,7 @@
-#define N 100000
+#define N 1000000
 #define TIME_STEPS 200000
 #define STEPS_PER_SAVE 1000
-#define OUT_FILE_PATH "RawExperimentalOutput/N100000T200000p0.75r1.0"
+#define OUT_FILE_PATH "RawExperimentalOutput/N1000000T200000p0.75r0.55"
 #define p 0.75
-#define r 1.0
+#define r 0.55
 #define INIT_PROB 0.5

@@ -11,7 +11,7 @@ import re
 from PIL import Image
 import csv
 
-N=100000
+N=1000000
 TIME_STEPS = 200000
 STEPS_PER_SAVE=1000
 
@@ -22,17 +22,11 @@ INIT_PROB =0.5
 #OUT_FILE_PATH = sys.argv[1]
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
-
-
 out_data_path = "runs_resultsBroad"
 KEEP_DATA = False
-"""
-rs = []
-final_active_states_counts  = []
-r_upper = 1 
-r_lower =0
-dr =  0.1
-"""
+r_upper = 0.55 
+r_lower =0.4
+
 def write_parameters(p,r):
     with open(PARAMETER_FILE,"w") as f:
         f.write("#define N "+str(N)+"\n")
@@ -78,29 +72,35 @@ def collect_data(ExperimentName):
         datas.append(list(f.readline()))
         counts.append(datas[-1].count("1"))
         f.close()
-        if(KEEP_DATA):
+        if(not KEEP_DATA):
             subprocess.run(["rm",cfile])
     return np.array(datas, dtype=int), np.array(counts)
 
-with open(out_data_path+".csv",'w') as f:
-    output_writer  = csv.writer(f)
-    for p in [0.75]:
-        for r in np.linspace(0.0,1,20):
-        #[0.25,0.26,0.27,0.28,0.29,0.3]:
-        
-    
-            expName = run_experiment(p,r)
-            #print(expName)
-    
-            data,counts = collect_data(expName)
-            output_writer.writerow((N,TIME_STEPS,p,r,counts.var(),counts[0],counts.mean()))
-             
-    
-    
-            #print("Gen image")
-            #im = Image.fromarray(np.uint8(data*255))
-            #im.save(expName+".png")
-            #print("Done with image")
-            #bplt.Plotting.colour_map_gen(data,expName+".png")  
-    
 
+
+def main():
+    global out_data_path 
+    out_data_path = out_data_path+str((r_lower,r_upper))
+    with open(out_data_path+".csv",'w') as f:
+        output_writer  = csv.writer(f)
+        for p in [0.75]:
+            for r in np.linspace(r_lower,r_upper,20):
+            #[0.25,0.26,0.27,0.28,0.29,0.3]:
+            
+        
+                expName = run_experiment(p,r)
+                #print(expName)
+        
+                data,counts = collect_data(expName)
+                output_writer.writerow((N,TIME_STEPS,p,r,counts.std(),counts[0],counts.mean()))
+                 
+        
+        
+                #print("Gen image")
+                #im = Image.fromarray(np.uint8(data*255))
+                #im.save(expName+".png")
+                #print("Done with image")
+                #bplt.Plotting.colour_map_gen(data,expName+".png")  
+    
+if __name__ == "__main__":
+    main()
