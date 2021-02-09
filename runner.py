@@ -84,8 +84,9 @@ def collect_data(ExperimentName):
 
 with open(out_data_path+".csv",'w') as f:
     output_writer  = csv.writer(f)
+    output_writer("States,Time steps,propagation probability, spread probability, dominated behaviour,StDev of counts, start Count, average count")
     for p in [0.75]:
-        for r in np.linspace(0.0,1,20):
+        for r in np.linspace(0.40,0.60,40):
         #[0.25,0.26,0.27,0.28,0.29,0.3]:
         
     
@@ -93,7 +94,8 @@ with open(out_data_path+".csv",'w') as f:
             #print(expName)
     
             data,counts = collect_data(expName)
-            output_writer.writerow((N,TIME_STEPS,p,r,counts.var(),counts[0],counts.mean()))
+            
+            output_writer.writerow((N,TIME_STEPS,p,r,len(data)==TIME_STEPS,counts.std(),counts[0],counts.mean()))
              
     
     
