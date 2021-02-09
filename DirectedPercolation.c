@@ -8,18 +8,22 @@
 #include "parameter.h"
 
 
-int write_to_file(bool dataSet[N],int t,char* ExperimentName)    {
+int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
     /*
      * Outputs the data (a timestep worth of states) to a file, since each item is fixed length we do not bother with csv
+     * Returns a count of number of active states remaining so the current run can end if it is zero
      * t : timestep represented, for file names
      * dataSet: the data (time step of states) being written to file
+     *
+     * 
      */
-
+    int count = 0;
     char savePath[200];
     //t = t/STEPS_PER_SAVE; //Better ordering
     sprintf(savePath,"%s/t%d.exp",OUT_FILE_PATH,t);
     FILE* out = fopen(savePath,"w");
     for (int i = 0; i < N; i++) {
+        count = count + dataSet[i];
         fprintf(out,"%d",dataSet[i]);
     }
     fclose(out);
@@ -104,7 +108,13 @@ int main(int argc, char* argv[])  {
 
         
         if(t%STEPS_PER_SAVE==0) {
-                write_to_file(pSpreadStep,t,ExperimentName);
+            int count = write_to_file_and_count(pSpreadStep,t,ExperimentName); 
+            if(count == 0||count==N){
+                //If active states are zero we have gone into laminar dominated, if all active 
+                //states then turbulence dominated either case is useless for finding the critical point
+                printf("Exiting current model as %d of %d states active, hence some behaviour dominates",count,N);
+                break;            
+            }
         }
         ap= (ap+2)%3;//Have to add 2 so to skip over the intermediate step
 

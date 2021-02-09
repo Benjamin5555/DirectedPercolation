@@ -92,8 +92,8 @@ def main():
                 #print(expName)
         
                 data,counts = collect_data(expName)
-                output_writer.writerow((N,TIME_STEPS,p,r,counts.std(),counts[0],counts.mean()))
                  
+                output_writer.writerow((N,TIME_STEPS,p,r,len(data)==TIME_STEPS,counts.std(),counts[0],counts.mean()))
         
         
                 #print("Gen image")
@@ -104,3 +104,14 @@ def main():
     
 if __name__ == "__main__":
     main()
+            
+             
+    
+    
+            #print("Gen image")
+            #im = Image.fromarray(np.uint8(data*255))
+            #im.save(expName+".png")
+            #print("Done with image")
+            #bplt.Plotting.colour_map_gen(data,expName+".png")  
+    
+
