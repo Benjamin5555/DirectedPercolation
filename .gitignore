@@ -1,5 +1,5 @@
 ./**.exp
 ./**.o
 ExperimentalOutput/
-RawExperimentalOutput/
+RawExperimentalOutput/*
 GenImages/
