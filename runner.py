@@ -89,7 +89,8 @@ def main():
     out_data_path = out_data_path+str((r_lower,r_upper))
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
-        output_writer.writerow("N,TIME_STEPS,p,r,steps complete (/num_step_per_save),stDevCounts,init count, average count,average diff in counts between time steps")
+        
+        #output_writer.writerow("N,TIME_STEPS,p,r,steps complete (/num_step_per_save),stDevCounts,init count, average count,average diff in counts between time steps")
         for p in [0.75]:
             for r in np.arange(r_lower,r_upper,0.01): 
                 out_full_data_path = out_data_path+"full"+str(r)
