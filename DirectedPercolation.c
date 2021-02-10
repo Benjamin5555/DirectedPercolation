@@ -23,11 +23,11 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
     sprintf(savePath,"%s/t%d.exp",OUT_FILE_PATH,t);
     FILE* out = fopen(savePath,"w");
     for (int i = 0; i < N; i++) {
-        count = count + dataSet[i];
+        if(dataSet[i])  {count++;}
         fprintf(out,"%d",dataSet[i]);
     }
     fclose(out);
-
+    return count;
 }
 
 
