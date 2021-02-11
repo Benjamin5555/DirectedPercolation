@@ -3,8 +3,8 @@
 #
 # C compiler and options 
 #
-CC=     gcc  -fopenmp  
-LIB=    -lm -Iparameter.h
+CC=     gcc  -fopenmp -g 
+LIB=    -lm -Iparameter.h 
 
 #
 # Object files
