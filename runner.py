@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 #N=100000
 #TIME_STEPS = 200000
 N=100000
-TIME_STEPS = 2000000
+TIME_STEPS = 20000
 STEPS_PER_SAVE=1000
 
 
@@ -26,11 +26,11 @@ INIT_PROB =0.5
 #OUT_FILE_PATH = sys.argv[1]
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
-out_data_path = "runs_resultsBroad"
+out_data_path = "runs_resultShort"
 KEEP_DATA = False
 r_upper = 0.9
 r_lower =0.1
-dr = 0.1
+dr = 0.01
 
 
 def write_parameters(p,r):
