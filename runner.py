@@ -15,8 +15,8 @@ import matplotlib.pyplot as plt
 #N=100000
 #TIME_STEPS = 200000
 N=100000
-TIME_STEPS = 20000
-STEPS_PER_SAVE=1000
+TIME_STEPS = 30000
+STEPS_PER_SAVE=10000
 
 
 OUT_FILE_PATH = ""
@@ -26,10 +26,10 @@ INIT_PROB =0.5
 #OUT_FILE_PATH = sys.argv[1]
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
-out_data_path = "runs_resultShort"
+out_data_path = "DataOutput/runs_result"
 KEEP_DATA = False
-r_upper = 0.9
-r_lower =0.1
+r_upper = 0.5
+r_lower =0.4
 dr = 0.01
 
 
@@ -108,9 +108,10 @@ def main():
                 
 
                 plt.plot(times, turbulentFraction,label=r)
-
-                for i in range(0,len(times)):
-                    output_writer.writerow((N,TIME_STEPS,p,r,times[i],turbulentFraction[i]))
+                with open(out_data_path+str(r)+'csv','w') as step_f:
+                    step_writer = csv.writer(step_f)
+                    for i in range(0,len(times)):
+                        step_writer.writerow((N,TIME_STEPS,p,r,times[i],turbulentFraction[i]))
 
             plt.savefig(fullExperimentName+".png") 
             plt.legend()
