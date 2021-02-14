@@ -1,0 +1,12 @@
+set datafile separator ','
+
+set key autotitle
+
+set title "0.453 to 0.454 range of r's for 500000 timesteps" 
+FILES = system("ls -1 runs_result0.453,0.454,*")
+
+set terminal png
+set output '0.453to0.454TS500000.png'
+
+
+plot for [data in FILES] data u 5:6 w l 

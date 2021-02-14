@@ -1,0 +1,12 @@
+set datafile separator ','
+
+set key autotitle
+
+set title "0.1 to 0.9 range of r's for " 
+FILES = system("ls -1 runs_result0.1,0.9,*")
+
+set terminal png
+set output '0.1to0.9.png'
+
+
+plot for [data in FILES] data u 5:6 w l 
