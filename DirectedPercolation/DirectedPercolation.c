@@ -107,11 +107,11 @@ int main(int argc, char* argv[])  {
             
    
        
-        
         if(t%STEPS_PER_SAVE==0) {
             int count = write_to_file_and_count(pSpreadStep,t,ExperimentName); 
             /*
             if(count == 0){
+                //All dead is an absorbing state so can disregard if that is reached
                 //If active states are zero we have gone into laminar dominated, if all active 
                 //states then turbulence dominated either case is useless for finding the critical point
                 printf("Exiting current model as %d of %d states active, hence some behaviour dominates",count,N);

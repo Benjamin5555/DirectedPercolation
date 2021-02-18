@@ -1,7 +1,7 @@
-#define N 1000
-#define TIME_STEPS 1000
+#define N 50
+#define TIME_STEPS 100
 #define STEPS_PER_SAVE 1
-#define OUT_FILE_PATH "RawExperimentalOutput/N1000T1000p0.34"
-#define p 0.34
-#define INIT_PROB 0.01
-#define SIGMA 3000000.0
+#define OUT_FILE_PATH "RawExperimentalOutput/N50T100p0.35"
+#define p 0.35
+#define INIT_PROB 0.05
+#define SIGMA 4.0

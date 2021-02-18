@@ -21,7 +21,6 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
      */
     int count = 0;
     char savePath[200];
-    //t = t/STEPS_PER_SAVE; //Better ordering
     
     sprintf(savePath,"%s/t%d.exp",OUT_FILE_PATH,t);
     FILE* out = fopen(savePath,"w");
@@ -43,16 +42,6 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
 }
 
 
-int init_to_zero(bool array[]) {
-    /*
-     *  Simply goes through and sets each element of the array to zero
-     */
-    for (int i = 0 ; i<N; i++)   {
-        array[i] = 0;
-    }
-}
-
-
 
 
 
@@ -64,10 +53,11 @@ int main(int argc, char* argv[])  {
     char ExperimentName[40];
   
     //srand48(42);//Debug so keep same seed each time
-    srand48(getpid()^time(0));//Seed number gen to time
-    precompute_denom(SIGMA);
+    srand48(getpid()^time(0));//Seed number gen to time and pid
     
-    printf("PRECOMPUTE DONE\n");
+    //Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
+    //via the get_denominator function
+    precompute_denom(SIGMA) ;
 
     //Make use of some counter %3 in place of the below
     bool dataStep[2][N];
@@ -84,15 +74,23 @@ int main(int argc, char* argv[])  {
 
 
         for (int i = 0; i < N; i++) {
+
+            // Active states have some sigma probability of  survival irregardless of other states
             double chi = previousStep[i] * p;       
+            
+            //Sum up effects of interaction with all states across the system (other than itself) 
+            //which act to increase the probability of survival into the next time step 
             double psi = 0;
             for (int j = 0; j < N; j++) {
                 if(i!= j)   {
+                    // Don't want to include the current particle in the calculation will diverge/give error
+                    
                     psi = psi+(previousStep[j]*p)/(get_denominator(i,j));
                 }
             }
             finalState[i] = (chi+psi)>drand48();
-
+            //printf("(%d,%f,%d);",previousStep[i],chi+psi,finalState[i]);
+         
         }
        
         if(t%STEPS_PER_SAVE==0) {
@@ -107,7 +105,7 @@ int main(int argc, char* argv[])  {
             */
         }
         ap= (ap+1)%2;//Have to add 2 so to skip over the intermediate step
-
+        //printf("TIMESTEP\n");
 
     }
 }

@@ -1,6 +1,10 @@
 ./**.exp
 ./**.o
-ExperimentalOutput/
-RawExperimentalOutput/*
+DirectedPercolation/ExperimentalOutput/
+DirectedPercolation/RawExperimentalOutput/*
 GenImages/
+LongRangeDirectedPercolation/ExperimentalOutput/
+LongRangeDirectedPercolation/RawExperimentalOutput/*
 Old\ Data/
+LongRangeDirectedPercolation/Testing/
+

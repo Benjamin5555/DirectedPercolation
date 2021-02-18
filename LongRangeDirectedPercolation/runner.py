@@ -15,7 +15,7 @@ import datetime
 
 #N=100000
 #TIME_STEPS = 200000
-N=1000
+N=50
 TIME_STEPS = 20000
 STEPS_PER_SAVE=1
 
@@ -88,22 +88,20 @@ def main():
     SIGMA = float(sys.argv[2])
     p = float(sys.argv[1])
     TIME_STEPS = int(sys.argv[3])
-    STEPS_PER_SAVE=int((sys.argv[4]))
-    INIT_PROB = float(sys.argv[5])
+    INIT_PROB = float(sys.argv[4])
     out_data_path = out_data_path+str(p)
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
         
         #output_writer.writerow("N,TIME_STEPS,p,r,steps complete (/num_step_per_save),stDevCounts,init count, average count,average diff in counts between time steps")
         #for p in [0.35]:
-                
         subExpName = run_experiment(p)
         times,turbulentFraction,data = collect_data(subExpName)
         print(data[0])
         print(data[-1])
         print("Gen image")
         im = Image.fromarray(np.uint8(data)*255)
-        im.save(subExpName+str(SIGMA)+","+str(INIT_PROB)+","+str(p)+".png")
+        im.save(subExpName+"Sig"+str(SIGMA)+"InitProb"+str(INIT_PROB)+".png")
         print("Done with image")
         #bplt.Plotting.colour_map_gen(data,expName+".png")  
    

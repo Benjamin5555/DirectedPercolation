@@ -21,13 +21,27 @@ int flat_index_convert(int i,int j) {
 
 
 float get_denominator(int i, int j) {
-    
+    /*
+     * Returns element of the precomputed matrix as though it was a 2D array, basically a simpler 
+     * access method 
+     */ 
     return preComp[flat_index_convert(i,j)];
     
 }
 
 
 int precompute_denom(float sigma)   {
+    /*
+     * Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
+     * via the get_denominator function.
+     *
+     * Stores into a 1D array in a manner that can be accessed as though in 2D array using the 
+     * get_denominator function, this is to save memory as the 2D form would be symmetric about the 
+     * diagonal
+     *
+     * Generates using that anything a distance of N/2 apart is closer by going 'through the 
+     * periodic boundary'
+     */ 
     for (int i = 0; i<N; i++)   {
         int j = 0;
         while(j<=i) {
@@ -43,7 +57,8 @@ int precompute_denom(float sigma)   {
 
         }
     }
-    printf("Precompute complete");
+
+    printf("Precompute complete\n");
 }
 
 
