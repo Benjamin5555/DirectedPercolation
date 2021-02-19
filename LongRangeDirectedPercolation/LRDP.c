@@ -42,7 +42,22 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
 }
 
 
+int gen_state_probabilities(double probabilities_array[], bool states_array[]) {
 
+    /*
+     *  Generates an array of random probabilities relating to each state in the array, 0 if state 
+     *  is passive
+     */
+    for (int i = 0 ; i<N; i++)   {
+        if(states_array[i])    {
+            probabilities_array[i] = drand48();
+        }
+        else
+        {
+            probabilities_array[i] = 0;
+        }
+    }
+}
 
 
 int main(int argc, char* argv[])  {
@@ -57,7 +72,8 @@ int main(int argc, char* argv[])  {
     
     //Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
     //via the get_denominator function
-    precompute_denom(SIGMA) ;
+    double normalisation = precompute_normalisation();
+    precompute_denom(SIGMA);
 
     //Make use of some counter %3 in place of the below
     bool dataStep[2][N];
@@ -75,20 +91,25 @@ int main(int argc, char* argv[])  {
 
         for (int i = 0; i < N; i++) {
 
+            double stateProbabilities[N];
+            gen_state_probabilities(stateProbabilities, previousStep);
+
+
             // Active states have some sigma probability of  survival irregardless of other states
-            double chi = previousStep[i] * p;       
+            double ownContribution = stateProbabilities[i];       
             
             //Sum up effects of interaction with all states across the system (other than itself) 
             //which act to increase the probability of survival into the next time step 
-            double psi = 0;
+            double otherContributions = 0;
             for (int j = 0; j < N; j++) {
                 if(i!= j)   {
                     // Don't want to include the current particle in the calculation will diverge/give error
                     
-                    psi = psi+(previousStep[j]*p)/(get_denominator(i,j));
+                    otherContributions = otherContributions+(stateProbabilities[j])/(get_denominator(i,j));
                 }
             }
-            finalState[i] = (chi+psi)>drand48();
+           
+            finalState[i] = (ownContribution+(normalisation)*otherContributions)>p; //Check meets threshold probability
             //printf("(%d,%f,%d);",previousStep[i],chi+psi,finalState[i]);
          
         }

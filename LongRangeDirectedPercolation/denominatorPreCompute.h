@@ -30,7 +30,7 @@ float get_denominator(int i, int j) {
 }
 
 
-int precompute_denom(float sigma)   {
+int precompute_denom()   {
     /*
      * Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
      * via the get_denominator function.
@@ -47,10 +47,10 @@ int precompute_denom(float sigma)   {
         while(j<=i) {
             int ij = abs(i-j);
             if(ij<= N/2)    {
-                preComp[flat_index_convert(i,j)]= pow(ij,sigma);
+                preComp[flat_index_convert(i,j)]= pow(ij,SIGMA);
             }
             else    {
-                preComp[flat_index_convert(i,j)]=pow(N-i+j,sigma);
+                preComp[flat_index_convert(i,j)]=pow(N-i+j,SIGMA);
             }
             
             j++;
@@ -61,4 +61,16 @@ int precompute_denom(float sigma)   {
     printf("Precompute complete\n");
 }
 
+
+
+double precompute_normalisation() {
+    double c;
+    for (int j = 1; j < N; j++) {
+        //printf("comp %f\n",pow(j,-1*SIGMA));
+
+        c = c  + pow(j,-1*SIGMA);
+    }
+    return 1/c;
+
+}
 
