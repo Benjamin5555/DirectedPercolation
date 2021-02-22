@@ -4,23 +4,13 @@
 
 float preComp[N];
 
-
-int ijTo1D(int i,int j) {
-    return abs(i-j-N*((int)2*(i-j)/N));
-}
-
 float get_denominator(int i, int j) {
     /*
      *
      */ 
-    if (i>j)    {
-        return preComp[ijTo1D(i,j)];
-    }
-    else {
-        return preComp[ijTo1D(j,i)];
-    }
+    return preComp[i-j-N*((int)2*(i-j)/N)];
+    
 }
-
 
 
 int precompute_denom()   {
@@ -28,14 +18,16 @@ int precompute_denom()   {
      *
      */ 
     int i = 0;
-    for (i;i <= N/2; i++) {
+    for (i;i < N/2; i++) {
         preComp[i] = pow(i,SIGMA);
     }
     for (i; i <N; i++)  {
         preComp[i] = pow(N-i,SIGMA);
     }
 
-
+    for (int i = 0; i < N; i++) {
+        printf("%d,",preComp[i]);
+    }
 
 
 }

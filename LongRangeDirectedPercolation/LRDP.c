@@ -80,14 +80,24 @@ int main(int argc, char* argv[])  {
     
 
     for (int i=0;i<N;i++)   {
-        dataStep[0][i] = drand48()<INIT_PROB; 
+        dataStep[0][i] = drand48()<INIT_PROB;
         //dataStep[0][i] = 1;//drand48()<INIT_PROB; 
     }
+
+
+
+    for (int i=0;i<N;i++)   {
+        for (int j =0; j<N;j++) {
+            printf("%f,",get_denominator(i,j));
+        }
+        printf("\n");
+    }
+  
+
     int ap = 0;//By moving the 0 position around we can just
     for(int t=0;t<TIME_STEPS;t++)   {
         bool*  previousStep = dataStep[ap%2];
         bool*  finalState = dataStep[(ap+1)%2];
-
 
         for (int i = 0; i < N; i++) {
 
