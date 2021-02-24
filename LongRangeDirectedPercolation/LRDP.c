@@ -85,14 +85,15 @@ int main(int argc, char* argv[])  {
     }
 
 
-
-    for (int i=0;i<N;i++)   {
+    
+    /*
+     for (int i=0;i<N;i++)   {
         for (int j =0; j<N;j++) {
             printf("%f,",get_denominator(i,j));
         }
         printf("\n");
     }
-  
+    */
 
     int ap = 0;//By moving the 0 position around we can just
     for(int t=0;t<TIME_STEPS;t++)   {
@@ -118,9 +119,15 @@ int main(int argc, char* argv[])  {
                     otherContributions = otherContributions+(stateProbabilities[j])/(get_denominator(i,j));
                 }
             }
-           
-            finalState[i] = (ownContribution+(normalisation)*otherContributions)>p; //Check meets threshold probability
-            //printf("(%d,%f,%d);",previousStep[i],chi+psi,finalState[i]);
+            printf("(%f,%f,%f)\n",normalisation+1,ownContribution*otherContributions,(1/(normalisation+1)*(ownContribution+otherContributions))); 
+            finalState[i] = (1/(normalisation+1)*(ownContribution+otherContributions))>p; //Check meets threshold probability
+            
+
+
+            //finalState[i] = ((ownContribution+(1/normalisation)*otherContributions))>p; //Check meets threshold probability
+            //printf("(%f,%f,%f,%f,%f)\n",normalisation,ownContribution,otherContributions,normalisation*otherContributions,(ownContribution+(1/normalisation)*otherContributions));
+
+
          
         }
        
