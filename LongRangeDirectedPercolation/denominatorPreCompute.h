@@ -2,15 +2,20 @@
 #include "parameter.h"
 
 
-float preComp[N];
+double preComp[N];
+
+
+int ijTo1D(int i,int j) {
+    return abs(i-j-N*((int)2*(i-j)/N));
+}
 
 float get_denominator(int i, int j) {
     /*
      *
      */ 
-    return preComp[i-j-N*((int)2*(i-j)/N)];
-    
+    return preComp[ijTo1D(i,j)];
 }
+
 
 
 int precompute_denom()   {
@@ -18,23 +23,23 @@ int precompute_denom()   {
      *
      */ 
     int i = 0;
-    for (i;i < N/2; i++) {
-        preComp[i] = pow(i,SIGMA);
+    for (i;i <= N/2; i++) {
+        preComp[i] = pow((double)i,(double)SIGMA);
     }
     for (i; i <N; i++)  {
-        preComp[i] = pow(N-i,SIGMA);
+        preComp[i] = pow((double)(N-i),(double)SIGMA);
     }
+
 }
 
 
 double precompute_normalisation() {
-    double c;
+    double c=0;
     for (int j = 1; j < N; j++) {
-        //printf("comp %f\n",pow(j,-1*SIGMA));
 
-        c = c  + pow(j,-1*SIGMA);
+        c = c  + pow((double)j,-1*(double)SIGMA);
     }
-    return 1/c;
+    return c;
 
 }
 

@@ -67,7 +67,6 @@ int main(int argc, char* argv[])  {
 
     char ExperimentName[40];
   
-    //srand48(42);//Debug so keep same seed each time
     srand48(getpid()^time(0));//Seed number gen to time and pid
     
     //Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
@@ -75,19 +74,22 @@ int main(int argc, char* argv[])  {
     double normalisation = precompute_normalisation();
     precompute_denom(SIGMA);
 
-    //Make use of some counter %3 in place of the below
+    //Make use of some counter %2 in place of the below
     bool dataStep[2][N];
     
 
     for (int i=0;i<N;i++)   {
-        dataStep[0][i] = drand48()<INIT_PROB; 
-        //dataStep[0][i] = 1;//drand48()<INIT_PROB; 
+        dataStep[0][i] = drand48()<INIT_PROB;
+        //dataStep[0][i] = 1; 
     }
+
+
+    
+
     int ap = 0;//By moving the 0 position around we can just
     for(int t=0;t<TIME_STEPS;t++)   {
         bool*  previousStep = dataStep[ap%2];
         bool*  finalState = dataStep[(ap+1)%2];
-
 
         for (int i = 0; i < N; i++) {
 
@@ -108,9 +110,12 @@ int main(int argc, char* argv[])  {
                     otherContributions = otherContributions+(stateProbabilities[j])/(get_denominator(i,j));
                 }
             }
-           
-            finalState[i] = (ownContribution+(normalisation)*otherContributions)>p; //Check meets threshold probability
-            //printf("(%d,%f,%d);",previousStep[i],chi+psi,finalState[i]);
+            
+
+
+            finalState[i] = ((ownContribution+(1/normalisation)*otherContributions))>p; //Check meets threshold probability
+
+
          
         }
        
@@ -126,7 +131,6 @@ int main(int argc, char* argv[])  {
             */
         }
         ap= (ap+1)%2;//Have to add 2 so to skip over the intermediate step
-        //printf("TIMESTEP\n");
 
     }
 }
