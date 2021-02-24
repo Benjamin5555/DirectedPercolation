@@ -4,4 +4,4 @@
 #define OUT_FILE_PATH "RawExperimentalOutput/N1000T1000p0.2"
 #define p 0.2
 #define INIT_PROB 1.0
-#define SIGMA 1.0
+#define SIGMA 4.0
