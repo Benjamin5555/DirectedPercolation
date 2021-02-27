@@ -2,7 +2,7 @@
 #include "parameter.h"
 
 
-double preComp[N];
+double preComp[(int)N/2+1];
 
 
 int ijTo1D(int i,int j) {
@@ -23,21 +23,20 @@ int precompute_denom()   {
      *
      */ 
     int i = 0;
-    for (i;i <= N/2; i++) {
-        preComp[i] = pow((double)i,(double)SIGMA);
+    for (i;i <= (int)N/2+1; i++) {
+        preComp[i] = pow((double)i,(double)SIGMA+1.0);
     }
-    for (i; i <N; i++)  {
-        preComp[i] = pow((double)(N-i),(double)SIGMA);
-    }
-
 }
 
-
 double precompute_normalisation() {
+    /*
+     *  Precomputes normalisation of the 'other contributions' requires denominators have already 
+     *  been precomputed 
+     */ 
     double c=0;
     for (int j = 1; j < N; j++) {
-
-        c = c  + pow((double)j,-1*(double)SIGMA);
+        c = c+1.0/get_denominator(0,j);
+        //c = c  + pow((double)j,-1*(double)SIGMA);
     }
     return c;
 

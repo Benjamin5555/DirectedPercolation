@@ -71,37 +71,49 @@ int main(int argc, char* argv[])  {
     
     //Generate all possible nearest neigbour distances (raised to power of sigma) for access later 
     //via the get_denominator function
+    precompute_denom();
     double normalisation = precompute_normalisation();
-    precompute_denom(SIGMA);
 
-    //Make use of some counter %2 in place of the below
+    //Store current [0] and next [1] steps of the system 
     bool dataStep[2][N];
     
-
+    
+    //initalisation of the system
     for (int i=0;i<N;i++)   {
         dataStep[0][i] = drand48()<INIT_PROB;
-        //dataStep[0][i] = 1; 
     }
 
-
+    /*Debug function
+    for (int i =0;i<N;i++)    {
+        for (int j =0; j<N;j++) {
+            printf("%d,",(int)get_denominator(i,j));
+        }
+        printf("\n");
+    }
+    */
     
 
-    int ap = 0;//By moving the 0 position around we can just
+    int ap = 0;//By moving the 0 position around we don't have to rewrite array from prev to next
+
+
     for(int t=0;t<TIME_STEPS;t++)   {
         bool*  previousStep = dataStep[ap%2];
         bool*  finalState = dataStep[(ap+1)%2];
+        
+        double stateProbabilities[N];
+        gen_state_probabilities(stateProbabilities, previousStep);
 
         for (int i = 0; i < N; i++) {
 
-            double stateProbabilities[N];
-            gen_state_probabilities(stateProbabilities, previousStep);
+            
+
 
 
             // Active states have some sigma probability of  survival irregardless of other states
             double ownContribution = stateProbabilities[i];       
             
             //Sum up effects of interaction with all states across the system (other than itself) 
-            //which act to increase the probability of survival into the next time step 
+           //which act to increase the probability of survival into the next time step 
             double otherContributions = 0;
             for (int j = 0; j < N; j++) {
                 if(i!= j)   {
@@ -121,14 +133,14 @@ int main(int argc, char* argv[])  {
        
         if(t%STEPS_PER_SAVE==0) {
             int count = write_to_file_and_count(finalState,t,ExperimentName); 
-            /*
+            
             if(count == 0){
                 //If active states are zero we have gone into laminar dominated, if all active 
                 //states then turbulence dominated either case is useless for finding the critical point
                 printf("Exiting current model as %d of %d states active, hence some behaviour dominates",count,N);
                 break;            
             }
-            */
+            
         }
         ap= (ap+1)%2;//Have to add 2 so to skip over the intermediate step
 
