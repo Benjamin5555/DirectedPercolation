@@ -80,7 +80,7 @@ int main(int argc, char* argv[])  {
     
     //initalisation of the system
     for (int i=0;i<N;i++)   {
-        dataStep[0][i] = drand48()<=INIT_PROB;
+        dataStep[0][i] = drand48()<INIT_PROB;
     }
 
     /*Debug function
@@ -103,6 +103,7 @@ int main(int argc, char* argv[])  {
         double stateProbabilities[N];
         gen_state_probabilities(stateProbabilities, previousStep);
 
+        #pragma omp parallel for default(none) shared(stateProbabilities,previousStep,finalState,ap,t,normalisation)
         for (int i = 0; i < N; i++) {
 
             

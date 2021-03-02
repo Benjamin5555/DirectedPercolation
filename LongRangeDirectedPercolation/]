@@ -97,14 +97,13 @@ def main():
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
-        for p in np.arange(p_high,p_low,-1*dp): 
+        for p in np.arange(p_low,p_high,dp): 
             subExpName = run_experiment(p)
             times,turbulentFraction,data = collect_data(subExpName) 
             
             
-            print("Plotting")
+
             plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
-            print("Done Plotting")
             with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
                 step_writer = csv.writer(step_f)
                 for i in range(0,len(times)):

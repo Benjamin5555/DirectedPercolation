@@ -25,6 +25,7 @@ int precompute_denom()   {
     int i = 0;
     for (i;i <= (int)N/2+1; i++) {
         preComp[i] = pow((double)i,(double)SIGMA+1.0);
+        printf("%d:%f\n",i,preComp[i]);
     }
 }
 
