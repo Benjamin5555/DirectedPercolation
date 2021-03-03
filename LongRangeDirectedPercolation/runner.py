@@ -102,8 +102,9 @@ def main():
             times,turbulentFraction,data = collect_data(subExpName) 
             
             
-
-            plt.plot(np.log(times),np.log(turbulentFraction),label=p)
+            print("Plotting")
+            plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+            print("Done Plotting")
             with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
                 step_writer = csv.writer(step_f)
                 for i in range(0,len(times)):
