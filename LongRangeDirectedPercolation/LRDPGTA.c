@@ -9,8 +9,12 @@
 #include "denominatorPreCompute.h"
 #include <omp.h>
 
+#define STR_HELPER(x) #x
+#define STR(x) STR_HELPER(x)
 
-int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
+#define ExperimentName STR(N),STR(TIME_STEPS),STR(SIGMA),STR(p)
+
+int write_to_file_and_count(bool dataSet[N],int t)    {
     /*
      * Outputs the data (a timestep worth of states) to a file, since each item is fixed length we do not bother with csv
      * Returns a count of number of active states remaining so the current run can end if it is zero
@@ -66,7 +70,7 @@ int main(int argc, char* argv[])  {
      * Expects N,TimeSteps,p,r
      */ 
 
-    char ExperimentName[40];
+
   
     srand48(getpid()^time(0));//Seed number gen to time and pid
     
@@ -78,15 +82,18 @@ int main(int argc, char* argv[])  {
     //Store current [0] and next [1] steps of the system 
     bool dataStep[2][N];
    
-#pragma omp parallel default(none) shared(normalisation,dataStep,
+#pragma omp parallel default(none) shared(normalisation,dataStep)
     {
-        unsigned short xsubi[3]=getpid()*omp_get_thread_num^time(0);
+        struct drand48_data *buffer;
+        double rndNum;
+        unsigned short xsubi[3] =  {(short)getpid(),(short)omp_get_thread_num(),(short)time(0)};
 
     
         //initalisation of the system
         for (int i=0;i<N;i++)   {
             dataStep[0][i] =1;
-            printf("%d,%f\n",omp_get_thread_num(),erand48_r(xsubi));
+            erand48_r(xsubi,buffer,&rndNum);
+            printf("%d,%f\n",omp_get_thread_num(),rndNum);
         }
 
         /*Debug function
@@ -108,7 +115,7 @@ int main(int argc, char* argv[])  {
             
             double stateProbabilities[N];
             gen_state_probabilities(stateProbabilities, previousStep);
-
+            #pragma omp for 
             for (int i = 0; i < N; i++) {
 
                 
@@ -138,7 +145,7 @@ int main(int argc, char* argv[])  {
             }
            
             if(t%STEPS_PER_SAVE==0) {
-                int count = write_to_file_and_count(finalState,t,ExperimentName); 
+                int count = write_to_file_and_count(finalState,t); 
                 
                 if(count == 0){
                     //If active states are zero we have gone into laminar dominated, if all active 
