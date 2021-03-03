@@ -95,12 +95,12 @@ int main(int argc, char* argv[])  {
 
     int ap = 0;//By moving the 0 position around we don't have to rewrite array from prev to next
 
+    double stateProbabilities[N];
 
     for(int t=0;t<TIME_STEPS;t++)   {
         bool*  previousStep = dataStep[ap%2];
         bool*  finalState = dataStep[(ap+1)%2];
         
-        double stateProbabilities[N];
         gen_state_probabilities(stateProbabilities, previousStep);
 
         for (int i = 0; i < N; i++) {
