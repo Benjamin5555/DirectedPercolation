@@ -85,7 +85,7 @@ def collect_data(ExperimentName):
 
 
 def main():
-    global out_data_path,p_low,p_high,dp,SIGMA, TIME_STEPS,STEPS_PER_SAVE, INIT_PROB
+    global out_data_path,p_low,p_high,dp,SIGMA, TIME_STEPS,STEPS_PER_SAVE, INIT_PROB,N
     SIGMA = float(sys.argv[1])
     p_low = float(sys.argv[2])
     p_high = float(sys.argv[3])
@@ -93,6 +93,7 @@ def main():
     TIME_STEPS = int(sys.argv[5])
     STEPS_PER_SAVE = int(sys.argv[6])
     INIT_PROB = float(sys.argv[7])
+    N = int(sys.argv[8])
     stime = str(datetime.datetime.now())
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
