@@ -1,7 +1,7 @@
 #define N 5000
-#define TIME_STEPS 250000
+#define TIME_STEPS 500000
 #define STEPS_PER_SAVE 500
-#define OUT_FILE_PATH "RawExperimentalOutput/N5000T250000p0.29999999999999993"
-#define p 0.29999999999999993
+#define OUT_FILE_PATH "RawExperimentalOutput/N5000T500000p0.37"
+#define p 0.37
 #define INIT_PROB 1.0
 #define SIGMA 10.0
