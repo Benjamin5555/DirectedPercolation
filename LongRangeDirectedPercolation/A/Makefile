@@ -26,7 +26,8 @@
 
 
 CC=gcc
-CFLAGS=-fopenmp -O3 -lm -I.
+CFLAGS= -std=c99 -fopenmp -O3 -lm -I.
+ 
 
 DEPS = denominatorPreCompute.h parameter.h
 OBJ = LRDPGTA.o 

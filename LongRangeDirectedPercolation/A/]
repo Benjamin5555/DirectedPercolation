@@ -105,13 +105,12 @@ int gen_state_probabilities(double probabilities_array[], bool states_array[]){
     }
 }
 
-/*
 int gen_state_probabilities_ts(double probabilities_array[], bool states_array[],int t, int ap){
 
-    *
+    /*
      *  Generates an array of random probabilities relating to each state in the array, 0 if state 
      *  is passive
-     *
+     */
     double rndNum;
     struct drand48_data *buffer;
     unsigned short xsubi[3] =  {(short)getpid()*t,(short)omp_get_thread_num(),(short)time(0)*t*ap};
@@ -129,7 +128,7 @@ int gen_state_probabilities_ts(double probabilities_array[], bool states_array[]
         }
     }
 }
-*/
+
 
 int main(int argc, char* argv[])  {
     /*
@@ -171,13 +170,13 @@ int main(int argc, char* argv[])  {
             bool*  previousStep = dataStep[ap%2];
             bool*  finalState = dataStep[(ap+1)%2];
             
-            double stateProbabilities[N];
-            gen_state_probabilities(stateProbabilities, previousStep);
+             double stateProbabilities[N];
+            //gen_state_probabilities(stateProbabilities, previousStep);
         
           #pragma omp parallel default(none) shared(ap,t,normalisation,dataStep,previousStep,finalState,stateProbabilities)
           {
     
-            //gen_state_probabilities_ts(stateProbabilities, previousStep, t, ap);
+            gen_state_probabilities_ts(double probabilities_array[], bool states_array[],int t, int ap){
 
 
 
