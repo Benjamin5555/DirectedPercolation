@@ -142,3 +142,39 @@ correlation matrix of the fit parameters:
                 a      b      
 a               1.000 
 b               1.000  1.000 
+
+
+*******************************************************************************
+Sat Mar  6 23:29:53 2021
+
+
+FIT:    data read from '0.4546.csv' u 5:6
+        format = x:z
+        x range restricted to [9.00000 : 17.0000]
+BREAK: No data to fit
+
+*******************************************************************************
+Sat Mar  6 23:40:57 2021
+
+
+FIT:    data read from '0.4546.csv'  u (log(5)):log(6)
+        format = x:z
+        #datapoints = 1000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+BREAK: Need via and either parameter list or file
+
+*******************************************************************************
+Sat Mar  6 23:41:09 2021
+
+
+FIT:    data read from '0.4546.csv'  u (log(5)):log(6)
+        format = x:z
+        #datapoints = 1000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+BREAK: Need via and either parameter list or file
