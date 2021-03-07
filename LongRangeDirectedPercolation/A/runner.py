@@ -114,7 +114,7 @@ def main():
     plt.ticklabel_format(useOffset=False)
 
     plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
-    plt.show() 
+    #plt.show() 
 
 
 
