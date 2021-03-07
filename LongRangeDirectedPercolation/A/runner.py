@@ -94,6 +94,11 @@ def main():
     STEPS_PER_SAVE = int(sys.argv[6])
     INIT_PROB = float(sys.argv[7])
     N = int(sys.argv[8])
+    try:
+        OUTPUT_TO_GRAPH =bool(int(sys.argv[9]))
+    except:
+        OUTPUT_TO_GRAPH=True
+    print(OUTPUT_TO_GRAPH)
     stime = str(datetime.datetime.now())
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
@@ -103,18 +108,21 @@ def main():
             times,turbulentFraction,data = collect_data(subExpName) 
             
             
-            print("Plotting")
-            plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
-            print("Done Plotting")
+            if(OUTPUT_TO_GRAPH):
+                print("Plotting")
+                plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+                print("Done Plotting")
+            print("Writing turbulent fractions to file")
             with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
                 step_writer = csv.writer(step_f)
                 for i in range(0,len(times)):
                     step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
-    plt.legend()
-    plt.ticklabel_format(useOffset=False)
+    if(OUTPUT_TO_GRAPH):
+        plt.legend()
+        plt.ticklabel_format(useOffset=False)
 
-    plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
-    plt.show() 
+        plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
+        plt.show() 
 
 
 
