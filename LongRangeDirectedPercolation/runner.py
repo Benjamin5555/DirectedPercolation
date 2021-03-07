@@ -15,7 +15,7 @@ import datetime
 
 #N=100000
 #TIME_STEPS = 200000
-N=2500
+N=1000
 TIME_STEPS = 20000
 STEPS_PER_SAVE=1
 
@@ -97,7 +97,7 @@ def main():
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
-        for p in np.arange(p_high,p_low,-1*dp): 
+        for p in np.arange(p_high+dp,p_low,-1*dp): 
             subExpName = run_experiment(p)
             times,turbulentFraction,data = collect_data(subExpName) 
             
