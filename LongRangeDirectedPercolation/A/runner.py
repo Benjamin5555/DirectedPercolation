@@ -117,17 +117,12 @@ def main():
                 step_writer = csv.writer(step_f)
                 for i in range(0,len(times)):
                     step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
+    
     if(OUTPUT_TO_GRAPH):
         plt.legend()
         plt.ticklabel_format(useOffset=False)
-
-<<<<<<< HEAD
-    plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
-    #plt.show() 
-=======
-        plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
+        plt.savefig(str(N)+str(TIME_STEPS)+str(p_low)+","+str(p_high)+","+str(dp)+stime+".png") 
         plt.show() 
->>>>>>> b304edcebd8fc82591e00e6b5b5ce2bb7acb26e0
 
 
 
