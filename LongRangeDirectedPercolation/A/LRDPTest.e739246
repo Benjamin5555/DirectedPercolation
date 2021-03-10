@@ -1,0 +1,23 @@
+mkdir: cannot create directory ‘RawExperimentalOutput/N1000T3000000p0.375’: File exists
+runner.py:113: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+Traceback (most recent call last):
+  File "runner.py", line 130, in <module>
+    main()
+  File "runner.py", line 113, in main
+    plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+  File "/usr/lib64/python3.6/site-packages/matplotlib/pyplot.py", line 3461, in scatter
+    ax = gca()
+  File "/usr/lib64/python3.6/site-packages/matplotlib/pyplot.py", line 969, in gca
+    return gcf().gca(**kwargs)
+  File "/usr/lib64/python3.6/site-packages/matplotlib/pyplot.py", line 586, in gcf
+    return figure()
+  File "/usr/lib64/python3.6/site-packages/matplotlib/pyplot.py", line 533, in figure
+    **kwargs)
+  File "/usr/lib64/python3.6/site-packages/matplotlib/backend_bases.py", line 161, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/usr/lib64/python3.6/site-packages/matplotlib/backends/_backend_tk.py", line 1046, in new_figure_manager_given_figure
+    window = Tk.Tk(className="matplotlib")
+  File "/usr/lib64/python3.6/tkinter/__init__.py", line 2023, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+_tkinter.TclError: no display name and no $DISPLAY environment variable
