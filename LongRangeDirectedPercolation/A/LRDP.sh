@@ -33,12 +33,16 @@
 # In this example, we're setting a maximum run time of 5 minutes.
 #
 ########################################################################
- 
+
+export OMP_NUM_THREADS=${NSLOTS}
+
+
 # Now you set up and run your job. For this trivial job, we're simply
 # going to go to sleep for a while. The "result" for this job will be the
 # two messages we echo below.
 echo "START"
-export OMP_NUM_THREADS=64
 echo $OMP_NUM_THREADS
 #python3 runner.py 10 0.3736 0.3742 0.0002 2000 10 1 10000 0
-python3 runner.py 10 0.3735 0.3744 0.0003 3000000 5000 1 10000 0
+python3 runner.py 10 0.373 0.375 0.0005 3000000 1000 1 2500 1
+
+#python3 runner.py 10 0.3735 0.3744 0.0003 3000000 5000 1 10000 0
