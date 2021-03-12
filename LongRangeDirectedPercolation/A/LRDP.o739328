@@ -1,0 +1,11 @@
+START
+64
+rm *.o LRDPGTA
+gcc -c -o LRDPGTA.o LRDPGTA.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDPGTA LRDPGTA.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDPGTA
+gcc -c -o LRDPGTA.o LRDPGTA.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDPGTA LRDPGTA.o -std=c99 -fopenmp -O3 -lm -I.
+False
+Writing turbulent fractions to file
+Writing turbulent fractions to file

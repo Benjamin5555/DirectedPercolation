@@ -103,7 +103,7 @@ def main():
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
-        for p in np.arange(p_high,p_low,-1*dp): 
+        for p in np.arange(p_low,p_high,dp): 
             subExpName = run_experiment(p)
             times,turbulentFraction,data = collect_data(subExpName) 
             

@@ -35,14 +35,14 @@
 ########################################################################
 
 export OMP_NUM_THREADS=${NSLOTS}
-
+export OMP_PROC_BIND=true
 
 # Now you set up and run your job. For this trivial job, we're simply
 # going to go to sleep for a while. The "result" for this job will be the
 # two messages we echo below.
 echo "START"
 echo $OMP_NUM_THREADS
-#python3 runner.py 10 0.3736 0.3742 0.0002 2000 10 1 10000 0
-python3 runner.py 10 0.373 0.374 0.0005 10000000 1000 1 2500 0
+python3 runner.py 10 0.373625  0.373625 1 5000000  1000 1 2500 0
 
-#python3 runner.py 10 0.3735 0.3744 0.0003 3000000 5000 1 10000 0
+#time python3 runner.py 10 0.37375 0.3740 0.00025 3000001 2000 1 5000 0
+
