@@ -101,22 +101,21 @@ def main():
     print(OUTPUT_TO_GRAPH)
     stime = str(datetime.datetime.now())
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
-    with open(out_data_path+".csv",'w') as f:
-        output_writer  = csv.writer(f)
-        for p in np.arange(p_low,p_high,dp): 
-            subExpName = run_experiment(p)
-            times,turbulentFraction,data = collect_data(subExpName) 
-            
-            
-            if(OUTPUT_TO_GRAPH):
-                print("Plotting")
-                plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
-                print("Done Plotting")
-            print("Writing turbulent fractions to file")
-            with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
-                step_writer = csv.writer(step_f)
-                for i in range(0,len(times)):
-                    step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
+    for p in np.arange(p_low,p_high,dp): 
+        #for p in [0.3, 0.4, 0.37365]:
+        subExpName = run_experiment(p)
+        times,turbulentFraction,data = collect_data(subExpName) 
+       
+       
+        if(OUTPUT_TO_GRAPH):
+            print("Plotting")
+            plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+            print("Done Plotting")
+        print("Writing turbulent fractions to file")
+        with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
+            step_writer = csv.writer(step_f)
+            for i in range(0,len(times)):
+                step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
     
     if(OUTPUT_TO_GRAPH):
         plt.legend()

@@ -42,7 +42,7 @@ export OMP_PROC_BIND=true
 # two messages we echo below.
 echo "START"
 echo $OMP_NUM_THREADS
-python3 runner.py 10 0.373625  0.373625 1 5000000  1000 1 2500 0
+#python3 runnerP.py 0
 
-#time python3 runner.py 10 0.37375 0.3740 0.00025 3000001 2000 1 5000 0
+python3 runner.py 10 0.37375 0.3740 0.000125 5000000 500 1 5000 0
 
