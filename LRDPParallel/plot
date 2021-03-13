@@ -1,0 +1,19 @@
+set datafile separator ","
+set terminal wxt
+
+p '0.3.csv'        u (log($4)):(log($5)) smooth acspline
+replot '0.4.csv'   u (log($4)):(log($5)) smooth acspline
+replot '37.csv'    u (log($4)):(log($5)) smooth acspline
+replot '38.csv'    u (log($4)):(log($5)) smooth acspline
+replot '374.csv'   u (log($4)):(log($5)) smooth acspline
+replot 'B37375csv' u (log($4)):(log($5)) smooth acspline
+
+
+
+p '0.3.csv'        u 4:(log($5)) smooth acspline
+replot '0.4.csv'   u 4:(log($5)) smooth acspline
+replot '37.csv'    u 4:(log($5)) smooth acspline
+replot '38.csv'    u 4:(log($5)) smooth acspline
+replot [0:3000000] '3737.csv'  u 4:(log($5)) smooth acspline
+replot '374.csv'   u 4:(log($5)) smooth acspline
+replot 'B37375csv' u 4:(log($5)) smooth acspline
