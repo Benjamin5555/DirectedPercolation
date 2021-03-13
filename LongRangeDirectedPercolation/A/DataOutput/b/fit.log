@@ -1,0 +1,120 @@
+
+
+*******************************************************************************
+Mon Mar  8 15:19:40 2021
+
+
+FIT:    data read from 'A374.csv'  u (log(4)):log(5)
+        format = x:z
+        x range restricted to [9.60000 : 15.6000]
+BREAK: No data to fit
+
+*******************************************************************************
+Mon Mar  8 15:21:16 2021
+
+
+FIT:    data read from 'A374.csv'  u (log($4)):(log($5))
+        format = x:z
+        x range restricted to [9.60000 : 15.6000]
+        #datapoints = 298
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 8.0130172181e+04   0.00e+00  9.90e+00    1.000000e+00   1.000000e+00
+   4 1.9521414908e+01  -3.72e-01  9.90e-04    1.556482e-04  -1.432773e+00
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 19.5214
+rel. change during last iteration : -3.71622e-06
+
+degrees of freedom    (FIT_NDF)                        : 296
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.256809
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0659507
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.000155648      +/- 0.01607      (1.032e+04%)
+b               = -1.43277         +/- 0.2245       (15.67%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.998  1.000 
+
+
+*******************************************************************************
+Mon Mar  8 15:21:44 2021
+
+
+FIT:    data read from 'A3741.csv'  u (log($4)):(log($5))
+        format = x:z
+        x range restricted to [9.60000 : 15.6000]
+        #datapoints = 298
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 2.4416682926e+01   0.00e+00  1.01e+00    1.556482e-04  -1.432773e+00
+   6 2.2168273236e+01  -1.47e-04  1.01e-06   -5.073752e-02  -7.963316e-01
+
+After 6 iterations the fit converged.
+final sum of squares of residuals : 22.1683
+rel. change during last iteration : -1.47096e-09
+
+degrees of freedom    (FIT_NDF)                        : 296
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.273666
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0748928
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = -0.0507375       +/- 0.01712      (33.75%)
+b               = -0.796332        +/- 0.2392       (30.04%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.998  1.000 
+
+
+*******************************************************************************
+Mon Mar  8 15:22:08 2021
+
+
+FIT:    data read from 'B3741.csv'  u (log($4)):(log($5))
+        format = x:z
+        x range restricted to [9.60000 : 15.6000]
+        #datapoints = 298
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x+b
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 3.2612291570e+01   0.00e+00  7.54e-01   -5.073752e-02  -7.963316e-01
+   3 2.9836531120e+01  -1.05e-01  7.54e-04   -1.584239e-02  -1.373686e+00
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 29.8365
+rel. change during last iteration : -1.04513e-06
+
+degrees of freedom    (FIT_NDF)                        : 296
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.317489
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.100799
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = -0.0158424       +/- 0.01986      (125.4%)
+b               = -1.37369         +/- 0.2775       (20.2%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.998  1.000 
