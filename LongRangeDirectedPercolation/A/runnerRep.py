@@ -56,7 +56,6 @@ def run_experiment(p):
     subprocess.run(["make"])
 
     exp = subprocess.run(["./LRDPGTA"])
-    
 
     return ExperimentName#exp.stdout.decode('utf-8')[:-1]
 
@@ -72,7 +71,6 @@ def collect_data(ExperimentName):
     datas = [] 
     turbulentFractions = []
     for cfile in files:
-        print(cfile)
         f =open(cfile,"r")#Open produced experiment
         datas.append(list(f.readline()))
         turbulentFractions.append(datas[-1].count("1")/N)
@@ -96,25 +94,50 @@ def main():
     STEPS_PER_SAVE = int(sys.argv[6])
     INIT_PROB = float(sys.argv[7])
     N = int(sys.argv[8])
-    OUTPUT_TO_GRAPH =bool(int(sys.argv[9]))
+    try:
+        OUTPUT_TO_GRAPH =bool(int(sys.argv[9]))
+    except:
+        OUTPUT_TO_GRAPH=True
+    n = int(sys.argv[10])
+    print(OUTPUT_TO_GRAPH)
     stime = str(datetime.datetime.now())
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
-        for p in np.arange(p_low,p_high,dp): 
-            subExpName = run_experiment(p)
-            times,turbulentFraction,data = collect_data(subExpName) 
+        for rep in range(n):
+            times = np.zeros(n)
+            turbulentFraction_d = np.zeros(n)
+            data_d = np.zeros(n)
+            for p in np.arange(p_high,p_low,-1*dp): 
+                subExpName = run_experiment(p)
+                times[rep],turbulentFraction_d[rep],data_d[rep] = collect_data(subExpName)  
             
-            
-            if(OUTPUT_TO_GRAPH):
-                print("Plotting")
-                plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
-                print("Done Plotting")
-            print("Writing turbulent fractions to file")
-            with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
-                step_writer = csv.writer(step_f)
-                for i in range(0,len(times)):
-                    step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
+
+        turbulentfraction = []
+        for i in range(len(turbulentFraction_d)):
+            s = 0
+            smax = 0
+            for j in range(len(turbulentFraction_d)):
+                if(not turbulentFraction_d[j][i] == 0):
+                    turbulentFraction[i] = (turbulentFraction[i]*s+turbulentFraction_d[j][i])/(s+1)
+                    s=s+1
+                else:
+                    turbulentFraction[i]=0
+                    break;
+            if(s > smax):
+                smax = s
+
+        times= np.arange(0,smax)
+        
+        if(OUTPUT_TO_GRAPH):
+            print("Plotting")
+            plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+            print("Done Plotting")
+        print("Writing turbulent fractions to file")
+        with open(out_data_path+str(SIGMA)+str(p)+'csv','w') as step_f:
+            step_writer = csv.writer(step_f)
+            for i in range(0,len(times)):
+                step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
     
     if(OUTPUT_TO_GRAPH):
         plt.legend()
