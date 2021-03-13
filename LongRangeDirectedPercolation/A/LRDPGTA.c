@@ -31,6 +31,8 @@ int write_to_file_and_count(bool dataSet[N],int t)    {
     char savePath[200];
     
     sprintf(savePath,"%s/t%d.exp",OUT_FILE_PATH,t);
+    printf("C:%s\n",savePath);
+
     FILE* out = fopen(savePath,"w");
     if(out ==NULL)  {
         printf("OUTPUT TO FILE ERROR");
@@ -91,7 +93,6 @@ int gen_state_probabilities(double probabilities_array[], bool states_array[]){
      *  Generates an array of random probabilities relating to each state in the array, 0 if state 
      *  is passive
      */
-    double rndNum;
 
     for (int i = 0 ; i<N; i++)   {
         if(states_array[i])    {
@@ -105,31 +106,6 @@ int gen_state_probabilities(double probabilities_array[], bool states_array[]){
     }
 }
 
-/*
-int gen_state_probabilities_ts(double probabilities_array[], bool states_array[],int t, int ap){
-
-    *
-     *  Generates an array of random probabilities relating to each state in the array, 0 if state 
-     *  is passive
-     *
-    double rndNum;
-    struct drand48_data *buffer;
-    unsigned short xsubi[3] =  {(short)getpid()*t,(short)omp_get_thread_num(),(short)time(0)*t*ap};
-
-#pragma omp for
-    for (int i = 0 ; i<N; i++)   {
-        if(states_array[i])    {
-            erand48_r(xsubi,buffer,&rndNum);
-            probabilities_array[i] = rndNum;
-
-        }
-        else
-        {
-            probabilities_array[i] = 0;
-        }
-    }
-}
-*/
 
 int main(int argc, char* argv[])  {
     /*
@@ -154,30 +130,21 @@ int main(int argc, char* argv[])  {
             dataStep[0][i] =1;
         }
 
-        /*Debug function
-        for (int i =0;i<N;i++)    {
-            for (int j =0; j<N;j++) {
-                printf("%d,",(int)get_denominator(i,j));
-            }
-            printf("\n");
-        }
-        */
-        
+            
 
         int ap = 0;//By moving the 0 position around we don't have to rewrite array from prev to next
 
+        double stateProbabilities[N];
 
         for(int t=0;t<TIME_STEPS;t++)   {
             bool*  previousStep = dataStep[ap%2];
             bool*  finalState = dataStep[(ap+1)%2];
             
-            double stateProbabilities[N];
             gen_state_probabilities(stateProbabilities, previousStep);
         
           #pragma omp parallel default(none) shared(ap,t,normalisation,dataStep,previousStep,finalState,stateProbabilities)
           {
     
-            //gen_state_probabilities_ts(stateProbabilities, previousStep, t, ap);
 
 
 
