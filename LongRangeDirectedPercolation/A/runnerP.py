@@ -104,7 +104,7 @@ def main():
     with open(out_data_path+".csv",'w') as f:
         output_writer  = csv.writer(f)
         #for p in np.arange(p_low,p_high,dp): 
-        for p in [0.3, 0.4, 0.37365]:
+        for p in [0.3, 0.4, 0.3737]:
             subExpName = run_experiment(p)
             times,turbulentFraction,data = collect_data(subExpName) 
             
