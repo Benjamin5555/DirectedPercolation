@@ -13,4 +13,4 @@ LRDP: $(OBJ)
 
 
 clean:
-	rm *.o LRDPGTA
+	rm *.o LRDP
