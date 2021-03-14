@@ -10,6 +10,10 @@ import sys
 import re
 from PIL import Image
 import csv
+import matplotlib
+matplotlib.use('Agg')
+
+
 import matplotlib.pyplot as plt
 import datetime
 from scipy.optimize import curve_fit
@@ -107,27 +111,29 @@ def run_experiment(p):
             if(not KEEP_DATA):
                 subprocess.run(["rm",cfile])
 
-        ts_np = np.array(ts) 
-        tf_np= np.array(turbulentFractions)
-        ts_v = ts_np==0
-        tf_v = tf_np==0
-        valid = np.logical_not(np.logical_or(ts_v,tf_v))
-        #popt, pcov = curve_fit(f, lnts, lnTF,check_finite=False) # your data x, y to fit
+        if(ts[-1]>1e6):
 
-        try:
+            ts_np = np.array(ts) 
+            tf_np= np.array(turbulentFractions)
+            ts_v = ts_np==0
+            tf_v = tf_np==0
+            valid = np.logical_not(np.logical_or(ts_v,tf_v))
+            #popt, pcov = curve_fit(f, lnts, lnTF,check_finite=False) # your data x, y to fit
 
-            popt, pcov = curve_fit(f, np.log(ts_np[valid]), np.log(tf_np[valid]) ,check_finite=False) # your data x, y to fit
-            #print(popt[0],np.sqrt(np.diag(pcov)))
-            
-            if(abs(popt[0])<0.02):
-                #We stop the run if either the data is temporarily constant or if it goes to passive 
-                print("Const so quitting")
-                flag = False
+            try:
 
-                exp.terminate()
+                popt, pcov = curve_fit(f, np.log(ts_np[valid]), np.log(tf_np[valid]) ,check_finite=False) # your data x, y to fit
+                #print(popt[0],np.sqrt(np.diag(pcov)))
+                
+                if(abs(popt[0])<0.01):
+                    #We stop the run if either the data is temporarily constant or if it goes to passive 
+                    print("Const so quitting")
+                    flag = False
 
-        except:
-            pass
+                    exp.terminate()
+
+            except:
+                pass
 
         files_o = files_n
 
