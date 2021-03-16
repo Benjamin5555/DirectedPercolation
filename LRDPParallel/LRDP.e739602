@@ -1,0 +1,18 @@
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T4000000p0.3’: File exists
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T4000000p0.3’: File exists
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
+runnerNewS.py:171: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)
