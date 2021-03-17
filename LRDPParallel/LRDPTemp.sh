@@ -34,7 +34,7 @@
 #
 ########################################################################
 
-export OMP_NUM_THREADS=${NSLOTS}-1
+export OMP_NUM_THREADS=${NSLOTS}
 export OMP_PROC_BIND=true
 
 # Now you set up and run your job. For this trivial job, we're simply

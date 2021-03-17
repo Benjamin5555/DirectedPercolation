@@ -161,7 +161,8 @@ def main():
     stime = str(datetime.datetime.now())
     out_data_path = out_data_path+stime+str((p_low,p_high,dp))
     #for p in np.arange(p_low,p_high,dp): 
-    for p in [0.3, 0.4, 0.3,0.38,0.373,0.374,0.3735,0.37375]:
+    for p in [0.37]:
+    #for p in [0.3, 0.4, 0.3,0.37,0.38,0.373,0.374,0.3735,0.37375]:
         print(p)
         times,turbulentFraction =  run_experiment(p)
        
