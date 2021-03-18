@@ -125,7 +125,7 @@ def run_experiment(p):
                 popt, pcov = curve_fit(f, np.log(ts_np[valid]), np.log(tf_np[valid]) ,check_finite=False) # your data x, y to fit
                 #print(popt[0],np.sqrt(np.diag(pcov)))
                 
-                if(abs(popt[0])<0.005):
+                if(abs(popt[0])<0.002):
                     #We stop the run if either the data is temporarily constant or if it goes to passive 
                     print("Const so quitting")
                     flag = False
@@ -162,6 +162,7 @@ def main():
     out_data_path = out_data_path+stime+"."+str((p_low,p_high,dp))
     for p in np.arange(p_low,p_high,dp): 
         #for p in [0.3, 0.4, 0.37365]:
+        print("#####################################")
         print(p)
         times,turbulentFraction =  run_experiment(p)
        
@@ -175,7 +176,8 @@ def main():
             step_writer = csv.writer(step_f)
             for i in range(0,len(times)):
                 step_writer.writerow((N,TIME_STEPS,p,times[i],turbulentFraction[i]))
-    
+        print("#####################################")
+
     if(OUTPUT_TO_GRAPH):
         plt.legend()
         plt.ticklabel_format(useOffset=False)

@@ -75,7 +75,7 @@ int main(int argc, char* argv[])  {
      * Expects N,TimeSteps,p,r
      */ 
 
-
+    printf("p=%d\n",p);
     mkdir(OUT_FILE_PATH, 0700);
  
     srand48(getpid()^time(0));//Seed number gen to time and pid
