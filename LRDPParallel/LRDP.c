@@ -33,7 +33,7 @@ int write_to_file_and_count(bool dataSet[N],int t)    {
     FILE* out = fopen(savePath,"w");
 
     if(out ==NULL)  {
-        printf("OUTPUT TO FILE ERROR\n");
+        perror("OUTPUT TO FILE ERROR\n");
         return -1;
     }
     else
@@ -142,7 +142,7 @@ int main(int argc, char* argv[])  {
                 int count = write_to_file_and_count(finalState,t); 
                 //printf("%d,%d\n",t,count); 
                 if(count == -1) {
-                    printf("File Output error, Step not recorded")    {
+                    printf("File Output error, Step not recorded\n");    
                 }
                 else if(count == 0){
                     //If active states are zero we have gone into laminar dominated, if all active 

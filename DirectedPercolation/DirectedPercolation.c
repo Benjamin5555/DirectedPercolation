@@ -25,8 +25,8 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
     sprintf(savePath,"%s/t%d.exp",OUT_FILE_PATH,t);
     FILE* out = fopen(savePath,"w");
     if(out ==NULL)  {
-        printf("OUTPUT TO FILE ERROR");
-        return 0;
+        perror("OUTPUT TO FILE ERROR:");
+        return -1;
     }
     else
     {
@@ -36,6 +36,8 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
                 {count++;}
             fprintf(out,"%d",dataSet[i]);
         }
+
+        printf("%d,%d,%f\n",t,count,(double)count/N);
     }
     fclose(out);
     return count;
@@ -109,8 +111,11 @@ int main(int argc, char* argv[])  {
        
         if(t%STEPS_PER_SAVE==0) {
             int count = write_to_file_and_count(pSpreadStep,t,ExperimentName); 
-            
-            if(count == 0){
+            if(count == -1) {
+                printf("File Error, Skipped writing point to file\n");
+                
+            }
+            else if(count == 0){
                 //All dead is an absorbing state so can disregard if that is reached
                 //If active states are zero we have gone into laminar dominated, if all active 
                 //states then turbulence dominated either case is useless for finding the critical point
