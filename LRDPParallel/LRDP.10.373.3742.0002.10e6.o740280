@@ -1,0 +1,57 @@
+START
+63
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=-798086600
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+#####################################
+0.373
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.3732
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37339999999999995
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37359999999999993
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.3737999999999999
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.3739999999999999
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
