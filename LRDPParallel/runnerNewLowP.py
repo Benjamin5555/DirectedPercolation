@@ -126,7 +126,7 @@ def run_experiment(p):
                 popt, pcov = curve_fit(f, np.log(ts_np[valid]), np.log(tf_np[valid]) ,check_finite=False) # your data x, y to fit
                 #print(popt[0],np.sqrt(np.diag(pcov)))
                 
-                if(abs(popt[0])<0.00005):
+                if(abs(popt[0])<0.0001):
                     #We stop the run if either the data is temporarily constant or if it goes to passive 
                     print("Const so quitting")
                     flag = False

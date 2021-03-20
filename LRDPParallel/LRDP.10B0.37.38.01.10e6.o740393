@@ -1,0 +1,112 @@
+START
+63
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.370000
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.371000
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.372000
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373000
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.374000
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.375000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.376000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.377000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.378000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.379000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.380000
+Exiting current model as 0 of 2500 states active, hence some behaviour dominates#####################################
+0.37
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.371
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.372
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.373
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.374
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.375
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.376
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.377
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.378
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.379
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.38
+No active states, quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################

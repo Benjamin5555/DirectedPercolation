@@ -1,4 +1,3 @@
-//Assumes char size of 8 bits	
 #define _XOPEN_SOURCE
 #include <stdlib.h>
 #include <stdbool.h>
@@ -55,8 +54,7 @@ int gen_state_probabilities(double probabilities_array[], bool states_array[]){
      *  Generates an array of random probabilities relating to each state in the array, 0 if state 
      *  is passive
      */
-    double rndNum;
-
+    
     for (int i = 0 ; i<N; i++)   {
         if(states_array[i])    {
             probabilities_array[i] = drand48();
@@ -75,7 +73,7 @@ int main(int argc, char* argv[])  {
      * Expects N,TimeSteps,p,r
      */ 
 
-    printf("p=%d\n",p);
+    printf("p=%f\n",p);
     mkdir(OUT_FILE_PATH, 0700);
  
     srand48(getpid()^time(0));//Seed number gen to time and pid
