@@ -45,6 +45,6 @@ echo $OMP_NUM_THREADS
 #python3 runnerP.py 0
 #python3 runnerNewS.py 10 -1 -1 -1 4000000 10 1 2500 1
 #python3 runnerNew.py 10 0.3737 0.3739 0.00005 10000000 500 1 5000 0
-python3 runnerNew.py 10 0.373 0.375 0.0005 5000000 500 1 2500 0
+python3 runnerNew.py 10 0.374 0.3745 0.0001 5000000 500 1 2500 0
 
 
