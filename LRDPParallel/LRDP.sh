@@ -34,7 +34,8 @@
 #
 ########################################################################
 
-export OMP_NUM_THREADS=63
+export OMP_NUM_THREADS= 63
+
 export OMP_PROC_BIND=true
 
 # Now you set up and run your job. For this trivial job, we're simply
@@ -45,6 +46,6 @@ echo $OMP_NUM_THREADS
 #python3 runnerP.py 0
 #python3 runnerNewS.py 10 -1 -1 -1 4000000 10 1 2500 1
 #python3 runnerNew.py 10 0.3737 0.3739 0.00005 10000000 500 1 5000 0
-python3 runnerNew.py 10 0.374 0.3745 0.0001 5000000 500 1 2500 0
+python3 runnerNew.py 10 0.373 0.374 0.0001 5000000 500 1 5000 0
 
 
