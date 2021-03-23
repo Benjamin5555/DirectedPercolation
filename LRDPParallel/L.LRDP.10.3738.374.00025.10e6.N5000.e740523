@@ -1,6 +1,4 @@
-/opt/sge/school/spool/morar1/job_scripts/740478: line 37: export: `63': not a valid identifier
-
-libgomp: Invalid value for environment variable OMP_NUM_THREADS
+/opt/sge/school/spool/phcomputeall01/job_scripts/740523: line 37: export: `39': not a valid identifier
 
 libgomp: Invalid value for environment variable OMP_NUM_THREADS
 
