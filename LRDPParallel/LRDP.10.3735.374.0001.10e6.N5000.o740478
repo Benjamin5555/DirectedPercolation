@@ -17,3 +17,13 @@ p=0.373300
 rm *.o LRDP
 gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
 gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373400
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
