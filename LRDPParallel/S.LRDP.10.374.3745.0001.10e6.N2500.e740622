@@ -1,0 +1,27 @@
+/opt/sge/school/spool/morar2/job_scripts/740622: line 37: export: `39': not a valid identifier
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.374’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.3741’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.3742’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.37429999999999997’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.37439999999999996’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T5000000p0.37449999999999994’: File exists
+
+libgomp: Invalid value for environment variable OMP_NUM_THREADS
+Traceback (most recent call last):
+  File "runnerNew.py", line 191, in <module>
+    main()
+  File "runnerNew.py", line 168, in main
+    times,turbulentFraction =  run_experiment(p)
+  File "runnerNew.py", line 105, in run_experiment
+    ts.append(int(file_out[0]))
+UnboundLocalError: local variable 'file_out' referenced before assignment
