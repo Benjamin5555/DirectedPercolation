@@ -104,10 +104,10 @@ def run_experiment(p):
             
             ts.append(int(file_out[0]))
             turbulentFractions.append(int(file_out[1])/N)
-            if(turbulentFractions[-1]==0):
-                print("No active states, quitting")
-                flag=False
-                break
+            #if(turbulentFractions[-1]==0):
+            #    print("No active states, quitting")
+            #    flag=False
+            #    break
             
             if(not KEEP_DATA):
                 subprocess.run(["rm",cfile])

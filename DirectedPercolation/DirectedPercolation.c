@@ -37,7 +37,7 @@ int write_to_file_and_count(bool dataSet[N],int t,char* ExperimentName)    {
             fprintf(out,"%d",dataSet[i]);
         }
 
-        printf("%d,%d,%f\n",t,count,(double)count/N);
+        //printf("%d,%d,%f\n",t,count,(double)count/N);
     }
     fclose(out);
     return count;
