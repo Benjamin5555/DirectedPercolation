@@ -1,0 +1,51 @@
+START
+63
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373960
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373970
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373980
+Exiting current model as 0 of 2500 states active, hence some behaviour dominatesrm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+p=0.373990
+#####################################
+0.37395
+Const so quitting
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37396
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37397
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37398000000000003
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################
+#####################################
+0.37399000000000004
+Program complete
+DONE!!!
+Writing turbulent fractions to file
+#####################################

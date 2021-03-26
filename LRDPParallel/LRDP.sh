@@ -34,7 +34,7 @@
 #
 ########################################################################
 
-export OMP_NUM_THREADS=39
+export OMP_NUM_THREADS=63
 
 export OMP_PROC_BIND=true
 
@@ -46,6 +46,6 @@ echo $OMP_NUM_THREADS
 #python3 runnerP.py 0
 #python3 runnerNewS.py 10 -1 -1 -1 4000000 10 1 2500 1
 #python3 runnerNew.py 10 0.3737 0.3739 0.00005 10000000 500 1 5000 0
-python3 runnerNew.py 10 0.374 0.3745 0.0001 5125000 100 1 2500 0
+python3 runnerNew.py 10 0.37395 0.374 0.00001 5025000 100 1 2500 0
 
 
