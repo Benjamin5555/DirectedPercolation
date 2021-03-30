@@ -1,0 +1,5 @@
+rm: cannot remove ‘*.o’: No such file or directory
+rm: cannot remove ‘LRDP’: No such file or directory
+make: *** [clean] Error 1
+runnerNew.py:173: RuntimeWarning: divide by zero encountered in log
+  plt.scatter(np.log(times),np.log(turbulentFraction),label=p)

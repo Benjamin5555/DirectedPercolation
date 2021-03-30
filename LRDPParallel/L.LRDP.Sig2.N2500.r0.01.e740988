@@ -1,0 +1,9 @@
+mkdir: cannot create directory ‘RawExperimentalOutput/N2500T1000000p0.34’: File exists
+Traceback (most recent call last):
+  File "runnerNew.py", line 191, in <module>
+    main()
+  File "runnerNew.py", line 168, in main
+    times,turbulentFraction =  run_experiment(p)
+  File "runnerNew.py", line 97, in run_experiment
+    with open(cfile) as csvfile:
+FileNotFoundError: [Errno 2] No such file or directory: 'RawExperimentalOutput/N2500T1000000p0.34/t0.exp'

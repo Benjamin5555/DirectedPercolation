@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "runnerNew.py", line 190, in <module>
+    main()
+  File "runnerNew.py", line 153, in main
+    TIME_STEPS = int(sys.argv[5])
+ValueError: invalid literal for int() with base 10: '1e6'

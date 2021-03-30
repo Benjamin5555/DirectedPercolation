@@ -1,0 +1,13 @@
+START
+49
+rm *.o LRDP
+gcc -c -o LRDP.o LRDP.c -std=c99 -fopenmp -O3 -lm -I.
+gcc -o LRDP LRDP.o -std=c99 -fopenmp -O3 -lm -I.
+#####################################
+0.374
+Const so quitting
+DONE!!!
+Plotting
+Done Plotting
+Writing turbulent fractions to file
+#####################################
