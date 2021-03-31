@@ -16,7 +16,7 @@ import datetime
 #N=100000
 #TIME_STEPS = 200000
 N=1000000
-TIME_STEPS =2.5E6
+TIME_STEPS =0.1E6
 
 STEPS_PER_SAVE=500
 INIT_PROB=1
@@ -25,7 +25,7 @@ OUT_FILE_PATH = ""
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
 out_data_path = "DataOutput/runs_result"
-KEEP_DATA = False
+KEEP_DATA = True#False
 
 
 def write_parameters(p,r):
@@ -73,7 +73,7 @@ def collect_data(ExperimentName):
         if(not KEEP_DATA):
             subprocess.run(["rm",cfile])
 
-    return np.arange(0,len(turbulentFractions)*STEPS_PER_SAVE,STEPS_PER_SAVE), turbulentFractions 
+    return np.arange(0,len(turbulentFractions)*STEPS_PER_SAVE,STEPS_PER_SAVE), turbulentFractions, datas
 
 
 
@@ -87,7 +87,7 @@ def main():
         
         #output_writer.writerow("N,TIME_STEPS,p,r,steps complete (/num_step_per_save),stDevCounts,init count, average count,average diff in counts between time steps")
         for p in [0.75]:
-            for r in [0.4,0.5,0.45,0.46,0.454,0.455,0.4546,0.4547,0.45465]:
+            for r in [0.5,0.4,0.45465]:
                 out_full_data_path = out_data_path+"."+str(r)
         
                 print((p,r))     
@@ -95,27 +95,27 @@ def main():
                 subExpName = run_experiment(p,r)
                 #print(expName)
         
-                times,turbulentFraction = collect_data(subExpName)
+                times,turbulentFraction, data = collect_data(subExpName)
+
+                print("Gen image")
+                im = Image.fromarray(np.uint8(data)*255)
+                im.save(subExpName+str(r)+".png")
+                print("Done with image")
 
                 
-                
-                plt.plot(times, turbulentFraction,label=r)
-                with open(out_data_path+str(r)+'csv','w') as step_f:
-                    step_writer = csv.writer(step_f)
-                    for i in range(0,len(times)):
-                        step_writer.writerow((N,TIME_STEPS,p,r,times[i],turbulentFraction[i]))
-            plt.xlabel("Time (Dimensionless)")
-            plt.ylabel("Turbulent Fraction")
-            plt.legend()
-            plt.ticklabel_format(useOffset=False)
+                #plt.plot(times, turbulentFraction,label=r)
+                #with open(out_data_path+str(r)+'csv','w') as step_f:
+                #    step_writer = csv.writer(step_f)
+                #    for i in range(0,len(times)):
+                #        step_writer.writerow((N,TIME_STEPS,p,r,times[i],turbulentFraction[i]))
+            #plt.xlabel("Time (Dimensionless)")
+            #plt.ylabel("Turbulent Fraction")
+            #plt.legend()
+            #plt.ticklabel_format(useOffset=False)
 
-            plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(r_lower)+","+str(r_upper)+","+str(dr)+str(datetime.datetime.now())+".png") 
-            plt.show() 
-                #print("Gen image")
-                #im = Image.fromarray(np.uint8(data*255))
-                #im.save(expName+".png")
-                #print("Done with image")
-                #bplt.Plotting.colour_map_gen(data,expName+".png")  
+            #plt.savefig(str(N)+str(TIME_STEPS)+str(p)+str(r_lower)+","+str(r_upper)+","+str(dr)+str(datetime.datetime.now())+".png") 
+            #plt.show() 
+                #                #bplt.Plotting.colour_map_gen(data,expName+".png")  
     
 if __name__ == "__main__":
     main()
