@@ -15,17 +15,17 @@ import datetime
 
 #N=100000
 #TIME_STEPS = 200000
-N=1000000
-TIME_STEPS =0.1E6
+N=1000
+TIME_STEPS =20000#0.1E6
 
-STEPS_PER_SAVE=500
+STEPS_PER_SAVE=1
 INIT_PROB=1
 
 OUT_FILE_PATH = ""
 PARAMETER_FILE = "parameter.h"
 RAW_DATA_OUT = "RawExperimentalOutput/"
 out_data_path = "DataOutput/runs_result"
-KEEP_DATA = True#False
+KEEP_DATA = False
 
 
 def write_parameters(p,r):
